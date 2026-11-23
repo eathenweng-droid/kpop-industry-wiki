@@ -1,0 +1,3 @@
+check_slides  slides=13  glossary_terms=20
+FAIL [s09] S3: 內文 121 字，超過 120
+RESULT: FAIL (1 errors)

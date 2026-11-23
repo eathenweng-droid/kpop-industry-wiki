@@ -1,0 +1,3 @@
+check_slides  slides=13  glossary_terms=20
+FAIL [s09] S7: 段落不在 outline.md 文案中（可能是未審過的改寫）：奴隸合約爭議後，2009 年標準專屬合約上限 7 年，形成「…
+RESULT: FAIL (1 errors)

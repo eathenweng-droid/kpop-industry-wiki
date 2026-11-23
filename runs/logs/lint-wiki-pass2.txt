@@ -1,0 +1,2 @@
+lint_wiki  today=2026-11-23  pages=12  raw=8
+RESULT: PASS

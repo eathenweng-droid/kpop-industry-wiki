@@ -1,0 +1,2 @@
+check_slides  slides=13  glossary_terms=20
+RESULT: PASS

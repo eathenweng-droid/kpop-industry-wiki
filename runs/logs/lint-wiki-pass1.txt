@@ -1,0 +1,13 @@
+lint_wiki  today=2026-11-23  pages=12  raw=8
+FAIL [album-sales-trend] R8: 粗體術語「口徑說明」沒有收錄在 glossary.md
+FAIL [debut-and-comeback] R8: 粗體術語「沒有」沒有收錄在 glossary.md
+FAIL [fandom-economy] R8: 粗體術語「小卡」沒有收錄在 glossary.md
+FAIL [fandom-economy] R8: 粗體術語「周邊型專輯」沒有收錄在 glossary.md
+FAIL [industry-overview] R8: 粗體術語「打歌」沒有收錄在 glossary.md
+FAIL [industry-overview] R8: 粗體術語「賣專輯」沒有收錄在 glossary.md
+FAIL [industry-overview] R8: 粗體術語「公司經營」沒有收錄在 glossary.md
+FAIL [industry-overview] R8: 粗體術語「續約」沒有收錄在 glossary.md
+FAIL [industry-overview] R8: 粗體術語「走向世界」沒有收錄在 glossary.md
+FAIL [music-shows] R7: S02 已超過 3 年，數字需標「較舊資料」：| Music Bank 數位音源佔比 | 65%（總分 200,000） | 2018 | [S0
+FAIL [music-shows] R7: S02 已超過 3 年，數字需標「較舊資料」：| M Countdown 數位音源佔比 | 45%（總分 11,000） | 2018 | [S0
+RESULT: FAIL (11 errors)

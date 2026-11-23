@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPOP 產業 LLM Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0c0b16;--panel:#16142a;--line:#2e2a52;--text:#f4f1ff;--muted:#a9a3cf;--pink:#ff5fa2;--violet:#a78bfa;--cyan:#38bdf8;--amber:#fbbf24}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(900px 400px at 80% -10%,rgba(167,139,250,.2),transparent 70%),var(--bg);color:var(--text);font-family:"Noto Sans TC",system-ui,sans-serif;line-height:1.75}
+main{max-width:980px;margin:0 auto;padding:56px 22px 70px}
+h1{font-size:clamp(2rem,5vw,3rem);margin:0 0 .3em;font-weight:900}
+h1 span{background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{margin:2.2em 0 .7em;font-size:1.35rem}
+p{color:var(--muted)}
+a{color:var(--violet)}
+.cta{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:26px}
+.cta a{display:block;text-decoration:none;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 20px}
+.cta a:hover{border-color:var(--violet)}
+.cta a.main{background:linear-gradient(135deg,rgba(255,95,162,.25),rgba(167,139,250,.25));border-color:var(--pink)}
+.cta b{display:block;font-size:1.1rem}
+.cta small{color:var(--muted)}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:.92rem}
+.flow span.h{border-color:var(--violet)}
+.flow span.v2{border-color:var(--amber);color:var(--amber)}
+.flow i{color:var(--muted);font-style:normal}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}
+th{color:var(--cyan)}
+footer{margin-top:50px;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+  <h1><span>KPOP 產業</span>怎麼運作？</h1>
+  <p>這個專案先把 8 篇來源整理成一個 LLM Wiki（知識庫），再讓 AI 只根據 Wiki 做出一份給初學者的教學簡報。每一步都有檢查腳本和執行紀錄。</p>
+
+  <div class="cta">
+    <a class="main" href="slides/index.html"><b>▶ 教學簡報</b><small>13 張・鍵盤 ← → 翻頁</small></a>
+    <a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/index.md"><b>📚 LLM Wiki</b><small>9 個概念頁＋術語表</small></a>
+    <a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/docs/workflow.md"><b>🔁 Loop / Graph 設計</b><small>流程圖、回圈、反思</small></a>
+    <a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/runs/run-001.md"><b>🧪 執行與檢查紀錄</b><small>run-001：每次 FAIL 都留著</small></a>
+  </div>
+
+  <h2>流程（workflow v2）</h2>
+  <div class="flow">
+    <span>① 取得資料</span><i>→</i><span>② 來源卡</span><i>→</i><span class="h">③ 先討論（人類決定）</span><i>→</i><span>④ 寫 Wiki</span><i>⇄</i><span>⑤ lint_wiki</span><i>→</i><span>⑥ claim ledger</span><i>⇄</i><span class="v2">⑥.5 文案審查</span><i>→</i><span>⑦ 產生簡報</span><i>⇄</i><span>⑧ check_slides</span><i>→</i><span>⑨ 渲染截圖</span><i>→</i><span>⑩ 發布</span>
+  </div>
+  <p>黃色是第一次實際執行後新增的節點：發現 AI 在壓縮投影片文字時最容易改掉原意，所以把語意檢查往前移到文案還跟來源放在一起的時候。</p>
+
+  <h2>這次實際執行的結果</h2>
+  <table>
+    <tr><th>檢查</th><th>第一次</th><th>最後</th></tr>
+    <tr><td>lint_wiki（Wiki 健康檢查）</td><td>FAIL 11 項</td><td>PASS</td></tr>
+    <tr><td>check_slides（簡報對照 S1–S7）</td><td>FAIL 11 項</td><td>PASS</td></tr>
+    <tr><td>人工語意審查</td><td>6 句意思被改掉</td><td>已修正，加上 S7 防止再發生</td></tr>
+    <tr><td>渲染截圖</td><td>換頁 bug、版面 3 處</td><td>13 張無溢出</td></tr>
+  </table>
+
+  <footer>來源：The Korea Times、The Korea Herald、KED Global、The Asia Business Daily、Soompi、Wikipedia（詳見 Wiki 索引）・不使用偶像照片、Logo 與歌詞</footer>
+</main>
+</body>
+</html>

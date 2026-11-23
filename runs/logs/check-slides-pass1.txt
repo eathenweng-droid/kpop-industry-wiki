@@ -1,0 +1,13 @@
+check_slides  slides=13  glossary_terms=20
+FAIL [s01] S2: 數字「101」在 ['industry-overview', 'fandom-economy'] 中找不到
+FAIL [s02] S5: 術語「打歌」第一次出現沒有用 <dfn> 解釋
+FAIL [s03] S3: 內文 135 字，超過 120
+FAIL [s07] S2: 數字「2023202420252026」在 ['album-sales-trend', 'fandom-economy'] 中找不到
+FAIL [s07] S5: 術語「周邊型專輯」第一次出現沒有用 <dfn> 解釋
+FAIL [s08] S3: 內文 135 字，超過 120
+FAIL [s08] S5: 術語「經紀公司」第一次出現沒有用 <dfn> 解釋
+FAIL [s08] S5: 術語「在地化團體」第一次出現沒有用 <dfn> 解釋
+FAIL [s09] S3: 內文 126 字，超過 120
+FAIL [s10] S3: 內文 121 字，超過 120
+FAIL [s13] S3: 內文 284 字，超過 200
+RESULT: FAIL (11 errors)

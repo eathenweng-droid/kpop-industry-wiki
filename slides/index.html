@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPOP 產業怎麼運作？｜教學簡報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b16; --panel:#16142a; --panel2:#1f1c3a; --line:#2e2a52;
+  --text:#f4f1ff; --muted:#a9a3cf; --pink:#ff5fa2; --violet:#a78bfa; --cyan:#38bdf8; --amber:#fbbf24;
+  --zh:"Noto Sans TC",system-ui,"PingFang TC","Microsoft JhengHei",sans-serif;
+  --en:"Space Grotesk",var(--zh);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font-family:var(--zh);overflow:hidden}
+#stage{position:fixed;inset:0;display:grid;place-items:center}
+#deck{width:1280px;height:720px;position:relative;transform-origin:center center}
+.slide{position:absolute;inset:0;padding:64px 80px 70px;display:none;flex-direction:column;
+  background:radial-gradient(900px 420px at 85% -10%,rgba(167,139,250,.18),transparent 70%),
+             radial-gradient(700px 380px at -5% 110%,rgba(255,95,162,.14),transparent 70%),var(--panel);
+  border:1px solid var(--line);border-radius:28px;overflow:hidden}
+.slide.active{display:flex}
+.kicker{font-family:var(--en);font-size:18px;letter-spacing:.12em;color:var(--violet);text-transform:uppercase;margin:0 0 10px}
+h1{font-size:64px;line-height:1.15;margin:0 0 18px;font-weight:900}
+h2{font-size:42px;line-height:1.2;margin:0 0 26px;font-weight:900}
+p,li{font-size:25px;line-height:1.6}
+.lead{font-size:30px;color:var(--muted);margin:0}
+.grad{background:linear-gradient(90deg,var(--pink),var(--violet),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+dfn{font-style:normal;color:var(--amber);border-bottom:2px dotted var(--amber);cursor:help}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;margin-bottom:24px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:22px 26px}
+.card h3{margin:0 0 8px;font-size:24px;color:var(--cyan)}
+.card p{margin:0;font-size:22px}
+.card .big,.big{font-family:var(--en);font-size:64px;font-weight:700;line-height:1;color:var(--pink)}
+.big small{font-size:24px;color:var(--muted);font-family:var(--zh);font-weight:500}
+.debate{margin-top:auto;border-left:6px solid var(--pink);background:rgba(255,95,162,.08);border-radius:0 14px 14px 0;padding:12px 20px}
+.debate b{color:var(--pink)}
+.debate p{margin:0;font-size:22px}
+.src{position:absolute;left:80px;bottom:24px;font-size:15px;color:var(--muted);margin:0}
+.src a{color:var(--violet)}
+.note{font-size:17px;color:var(--muted);margin:10px 0 0}
+/* map */
+.flow{display:flex;align-items:stretch;gap:10px;margin-top:20px}
+.step{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:18px;padding:18px 12px;text-align:center;position:relative}
+.step .n{font-family:var(--en);font-size:16px;color:var(--muted)}
+.step .ic{font-size:40px;display:block;margin:6px 0}
+.step .t{font-size:22px;font-weight:700}
+.step:not(:last-child)::after{content:"→";position:absolute;right:-12px;top:42%;color:var(--violet);font-size:20px}
+/* cycle */
+.cycle{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:6px 0 16px}
+.cycle div{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:16px;text-align:center;font-size:22px}
+.cycle div b{display:block;font-size:34px;margin-bottom:4px}
+/* score bars */
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:150px 1fr;align-items:center;gap:14px;font-size:21px}
+.bar span{height:26px;border-radius:8px;background:linear-gradient(90deg,var(--violet),var(--pink))}
+/* chart */
+.chart{display:flex;align-items:flex-end;gap:36px;height:300px;padding:0 10px;border-bottom:2px solid var(--line)}
+.col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%}
+.col .v{font-family:var(--en);font-weight:700;font-size:22px;margin-bottom:8px}
+.col .b{width:100%;border-radius:12px 12px 0 0;background:linear-gradient(180deg,var(--cyan),var(--violet))}
+.col .b.hi{background:linear-gradient(180deg,var(--pink),var(--violet))}
+.col .b.proj{background:repeating-linear-gradient(45deg,rgba(255,255,255,.15) 0 8px,transparent 8px 16px),var(--panel2);border:2px dashed var(--amber)}
+.xl{display:flex;gap:36px;padding:8px 10px 0}
+.xl div{flex:1;text-align:center;color:var(--muted);font-size:19px}
+/* label tree */
+.tree{display:flex;flex-direction:column;align-items:center;gap:14px}
+.parent{background:linear-gradient(90deg,var(--violet),var(--pink));border-radius:16px;padding:14px 34px;font-weight:900;font-size:24px}
+.labels{display:flex;gap:12px}
+.labels div{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:12px 16px;font-size:20px;text-align:center}
+/* timeline */
+.tl{display:flex;gap:0;margin:8px 0 18px}
+.tl div{flex:1;border-top:6px solid var(--violet);padding-top:10px;font-size:20px;color:var(--muted)}
+.tl div.end{border-color:var(--pink);color:var(--text);font-weight:700}
+/* table */
+table{border-collapse:collapse;width:100%;font-size:21px}
+th,td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+th{color:var(--cyan);font-weight:700}
+/* quiz */
+.quiz{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.q{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.q p{margin:0 0 10px;font-size:21px;font-weight:700}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-size:18px;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:999px;padding:5px 14px;cursor:pointer}
+.opts button.ok{background:#16a34a;border-color:#16a34a}
+.opts button.no{background:#7f1d1d;border-color:#b91c1c}
+.fb{font-size:16px;color:var(--muted);margin-top:8px;min-height:22px}
+/* refs */
+.refs{columns:2;column-gap:36px;font-size:17px;line-height:1.55;padding-left:22px;margin:0}
+.refs li{font-size:17px;break-inside:avoid;margin-bottom:6px}
+.refs a{color:var(--violet)}
+/* wiki chips */
+.wiki{position:absolute;right:80px;top:28px;display:flex;gap:8px}
+.wiki a{font-size:14px;color:var(--muted);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px}
+.wiki a:hover{color:var(--text);border-color:var(--violet)}
+/* chrome */
+#bar{position:fixed;left:0;top:0;height:4px;background:linear-gradient(90deg,var(--pink),var(--violet));transition:width .25s}
+#nav{position:fixed;bottom:14px;right:18px;display:flex;align-items:center;gap:10px;z-index:5}
+#nav button{font:inherit;font-size:18px;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--text);cursor:pointer}
+#count{font-family:var(--en);color:var(--muted);font-size:15px;min-width:56px;text-align:center}
+#home{position:fixed;bottom:22px;left:18px;font-size:14px;color:var(--muted);z-index:5}
+#home a{color:var(--muted)}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage"><div id="deck">
+
+<!-- s01 -->
+<section class="slide" id="s01" data-role="opening" data-wiki="industry-overview fandom-economy">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/industry-overview.md" target="_blank" rel="noopener">wiki: 產業全貌</a></div>
+  <p class="kicker">KPOP Industry 101</p>
+  <h1>為什麼有粉絲會把<br><span class="grad">同一張專輯買上百張？</span></h1>
+  <p class="lead">今天跟著「一個團的一生」，看懂 KPOP 產業怎麼運作。</p>
+  <div class="debate" style="margin-top:46px"><p>提示：答案藏在 <dfn title="買專輯抽籤，中籤者可以和成員面對面簽名聊天的活動">簽售會</dfn> 的規則裡——每買一張就多一次抽籤機會。</p></div>
+  <p class="src">來源：wiki／粉絲經濟［S06］</p>
+</section>
+
+<!-- s02 -->
+<section class="slide" id="s02" data-role="map" data-wiki="industry-overview">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/industry-overview.md" target="_blank" rel="noopener">wiki: 產業全貌</a></div>
+  <p class="kicker">全貌地圖</p>
+  <h2>一個團的一生：7 個環節</h2>
+  <div class="flow">
+    <div class="step"><span class="n">1</span><span class="ic">🏫</span><span class="t"><dfn title="還沒出道、在經紀公司接受訓練的人">練習生</dfn></span></div>
+    <div class="step"><span class="n">2</span><span class="ic">🎤</span><span class="t"><dfn title="第一次正式公開發表作品">出道</dfn></span></div>
+    <div class="step"><span class="n">3</span><span class="ic">📺</span><span class="t"><dfn title="帶新作品重新開始宣傳">回歸</dfn><dfn title="上音樂節目等宣傳新歌">打歌</dfn></span></div>
+    <div class="step"><span class="n">4</span><span class="ic">💿</span><span class="t">賣專輯</span></div>
+    <div class="step"><span class="n">5</span><span class="ic">🏢</span><span class="t">公司經營</span></div>
+    <div class="step"><span class="n">6</span><span class="ic">📝</span><span class="t"><dfn title="合約到期前後重新簽約延長合作">續約</dfn></span></div>
+    <div class="step"><span class="n">7</span><span class="ic">🌏</span><span class="t">走向世界</span></div>
+  </div>
+  <p class="note" style="margin-top:30px">每個環節後面都會附一個「爭議點」——這套系統很有效率，也有代價。</p>
+  <p class="src">來源：wiki／產業全貌［S01, S03–S07］</p>
+</section>
+
+<!-- s03 -->
+<section class="slide" id="s03" data-role="concept" data-wiki="trainee-system">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/trainee-system.md" target="_blank" rel="noopener">wiki: 練習生制度</a></div>
+  <p class="kicker">環節 1</p>
+  <h2>練習生：偶像是「培養」出來的</h2>
+  <div class="cols">
+    <div class="card"><h3>每天在做什麼</h3><p><dfn title="負責訓練、製作、宣傳與管理藝人的公司">經紀公司</dfn>甄選後訓練歌唱、舞蹈、外語；某大公司採「早九晚十」。</p></div>
+    <div class="card"><h3>人數在變少</h3><p class="big">1,170<small> 人（2022）</small></p><p>2020 年為 1,895 人；自願退出 34.4%。</p></div>
+  </div>
+  <div class="debate"><p><b>爭議：</b>女性青少年練習生健康問題普遍；出身愈來愈偏向富裕家庭。</p></div>
+  <p class="src">來源：wiki／練習生制度［S01］</p>
+</section>
+
+<!-- s04 -->
+<section class="slide" id="s04" data-role="concept" data-wiki="debut-and-comeback music-shows">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/debut-and-comeback.md" target="_blank" rel="noopener">wiki: 出道與回歸</a></div>
+  <p class="kicker">環節 2</p>
+  <h2>出道之後，人生是一輪輪「回歸」</h2>
+  <div class="cycle">
+    <div><b>🛠️</b>準備新作品</div>
+    <div><b>🎬</b><dfn title="新作品第一次在音樂節目上的表演">回歸舞台</dfn></div>
+    <div><b>📺</b>密集上節目宣傳</div>
+    <div><b>😴</b>休息、準備下一次</div>
+  </div>
+  <p>節目分數看「前一週」累積，所以回歸第一週通常拿不到第一名。</p>
+  <div class="debate"><p><b>注意：</b>一輪回歸多長？我們的 wiki 還沒有可靠來源，所以不亂講。</p></div>
+  <p class="src">來源：wiki／出道與回歸、音樂節目［S03］</p>
+</section>
+
+<!-- s05 -->
+<section class="slide" id="s05" data-role="concept" data-wiki="music-shows">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/music-shows.md" target="_blank" rel="noopener">wiki: 音樂節目與一位</a></div>
+  <p class="kicker">環節 3</p>
+  <h2>「<dfn title="音樂節目當週的第一名">一位</dfn>」怎麼算？不是只看人氣</h2>
+  <div class="cols">
+    <div class="bars">
+      <div class="bar">數位音源<span style="width:95%"></span></div>
+      <div class="bar">實體專輯<span style="width:35%"></span></div>
+      <div class="bar">MV 觀看<span style="width:40%"></span></div>
+      <div class="bar">電視廣播<span style="width:30%"></span></div>
+      <div class="bar">評分投票<span style="width:35%"></span></div>
+    </div>
+    <div class="card"><h3>重點</h3><p>週二到週日幾乎每天一個節目。音源通常最重；YouTube 觀看數讓海外粉絲也能影響結果。部分節目有<dfn title="同一首歌連續三週一位後不能再參賽">三冠王</dfn>規則。</p></div>
+  </div>
+  <p class="note">長條只示意「音源最重」，各節目實際比例不同且常改版。</p>
+  <div class="debate"><p><b>爭議：</b>專輯與投票都算分，粉絲會組織起來「打榜」。</p></div>
+  <p class="src">來源：wiki／音樂節目與一位［S02, S03］</p>
+</section>
+
+<!-- s06 -->
+<section class="slide" id="s06" data-role="concept" data-wiki="fandom-economy">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/fandom-economy.md" target="_blank" rel="noopener">wiki: 粉絲經濟</a></div>
+  <p class="kicker">環節 4</p>
+  <h2>粉絲經濟：簽售、小卡與超級粉絲</h2>
+  <div class="cols">
+    <div class="card"><h3>簽售是抽籤</h3><p class="big">30–100<small> 人／場</small></p><p>每人和成員相處約 1–3 分鐘，買愈多張、機會愈多。</p></div>
+    <div class="card"><h3>重複購買的設計</h3><p><dfn title="專輯內隨機附贈的成員照片卡">隨機小卡</dfn>讓人想收齊；<dfn title="公司大量鋪貨，再靠簽售消化銷量">推專輯</dfn>衝高首週銷量。高盛認為下一步是<dfn title="長期大量消費的核心粉絲">超級粉絲</dfn>。</p></div>
+  </div>
+  <div class="debate"><p><b>爭議：</b>負擔轉嫁給粉絲，多餘專輯常被丟棄。</p></div>
+  <p class="src">來源：wiki／粉絲經濟［S06, S07］</p>
+</section>
+
+<!-- s07 -->
+<section class="slide" id="s07" data-role="concept" data-wiki="album-sales-trend fandom-economy">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/album-sales-trend.md" target="_blank" rel="noopener">wiki: 專輯銷量變化</a></div>
+  <p class="kicker">環節 4（續）</p>
+  <h2>串流時代，實體專輯還賣得動嗎？</h2>
+  <div class="chart">
+    <div class="col"><div class="v">1億1,577萬</div><div class="b hi" style="height:100%"></div></div>
+    <div class="col"><div class="v">9,328萬</div><div class="b" style="height:80.6%"></div></div>
+    <div class="col"><div class="v">8,638萬</div><div class="b" style="height:74.6%"></div></div>
+    <div class="col"><div class="v">可能破一億？</div><div class="b proj" style="height:86%"></div></div>
+  </div>
+  <div class="xl"><div>2023</div><div>2024</div><div>2025</div><div>2026（預測）</div></div>
+  <p class="note">2026 年 1–9 月比去年同期多 760 萬張；<dfn title="做成鑰匙圈、公仔等周邊形式的專輯">周邊型專輯</dfn>佔比升到 17.8%。另一統計口徑下 2024 年約 9,890 萬張。</p>
+  <p class="src">來源：wiki／實體專輯銷量變化［S08；註腳 S07］</p>
+</section>
+
+<!-- s08 -->
+<section class="slide" id="s08" data-role="concept" data-wiki="agencies-and-labels">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/agencies-and-labels.md" target="_blank" rel="noopener">wiki: 經紀公司</a></div>
+  <p class="kicker">環節 5</p>
+  <h2>一家公司怎麼同時養很多團？</h2>
+  <div class="tree">
+    <div class="parent">母公司：管理後台</div>
+    <div class="labels"><div>廠牌 A<br>製作 A 團</div><div>廠牌 B<br>製作 B 團</div><div>廠牌 C<br>製作 C 團</div><div>海外廠牌<br>海外團體</div></div>
+  </div>
+  <p style="margin-top:20px"><dfn title="母公司管後台、旗下廠牌各自製作藝人">多廠牌制度</dfn>：HYBE 推動，SM 於 2023 年跟進。一團休息或入伍，其他團補上。</p>
+  <div class="debate"><p><b>爭議：</b>廠牌會互相競爭；2024 年 HYBE 內部衝突，股價跌約 9%。</p></div>
+  <p class="src">來源：wiki／經紀公司與多廠牌制度［S05, S07］</p>
+</section>
+
+<!-- s09 -->
+<section class="slide" id="s09" data-role="concept" data-wiki="contracts">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/contracts.md" target="_blank" rel="noopener">wiki: 合約與七年魔咒</a></div>
+  <p class="kicker">環節 6</p>
+  <h2>為什麼很多團在第 7 年解散？</h2>
+  <div class="tl"><div>出道</div><div>…</div><div>…</div><div>…</div><div class="end">第 7 年：合約到期</div></div>
+  <p><dfn title="期限過長、條件一面倒的合約">奴隸合約</dfn>爭議後，2009 年標準<dfn title="藝人只能透過該公司活動的合約">專屬合約</dfn>上限 7 年，形成「<dfn title="出道第 7 年常解散或換公司的現象">七年魔咒</dfn>」（如 2NE1 2016 年解散）。近年不少團提前續約，一般 3–5 年。</p>
+  <div class="debate"><p><b>爭議：</b>成員人氣落差引發的分潤爭議，過去常是解散原因之一。</p></div>
+  <p class="src">來源：wiki／專屬合約與七年魔咒［S04］</p>
+</section>
+
+<!-- s10 -->
+<section class="slide" id="s10" data-role="concept" data-wiki="globalization">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/globalization.md" target="_blank" rel="noopener">wiki: 全球化</a></div>
+  <p class="kicker">環節 7</p>
+  <h2>KPOP 一定要是韓國人唱嗎？</h2>
+  <div class="cols">
+    <div class="card"><h3>把系統搬到海外</h3><p>經紀公司在美國、日本、拉丁美洲招募並訓練<dfn title="在海外招募當地成員、用 KPOP 方式訓練的團體">在地化團體</dfn>，收入轉向海外版權與 IP。</p></div>
+    <div class="card"><h3>海外市場仍在長</h3><p class="big">2.918<small> 億美元</small></p><p>2025 年專輯出口金額，略增。</p></div>
+  </div>
+  <div class="debate"><p><b>還沒定論：</b>在地化團體能否複製成功，我們的 wiki 尚無來源評估。</p></div>
+  <p class="src">來源：wiki／全球化與在地化［S04, S07］</p>
+</section>
+
+<!-- s11 -->
+<section class="slide" id="s11" data-role="debate" data-wiki="industry-overview album-sales-trend contracts">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/industry-overview.md" target="_blank" rel="noopener">wiki: 產業全貌</a></div>
+  <p class="kicker">爭議與變化</p>
+  <h2>高效率的系統，代價由誰承擔？</h2>
+  <table>
+    <tr><th>環節</th><th>代價</th><th>正在發生的變化</th></tr>
+    <tr><td>練習生</td><td>健康、階級落差</td><td>人數減少、投資集中</td></tr>
+    <tr><td>賣專輯</td><td>粉絲負擔、浪費</td><td>買法改變：周邊型專輯</td></tr>
+    <tr><td>經營</td><td>廠牌權力衝突</td><td>多廠牌分散風險</td></tr>
+    <tr><td>合約</td><td>分潤爭議</td><td>提前續約變多</td></tr>
+  </table>
+  <p class="src">來源：wiki／產業全貌、專輯銷量、合約［S01, S04–S08］</p>
+</section>
+
+<!-- s12 -->
+<section class="slide" id="s12" data-role="quiz" data-wiki="music-shows contracts fandom-economy trainee-system">
+  <div class="wiki" title="這張投影片的內容來源"><a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/index.md" target="_blank" rel="noopener">wiki: 索引</a></div>
+  <p class="kicker">回顧小測驗</p>
+  <h2>點選你的答案</h2>
+  <div class="quiz">
+    <div class="q"><p>1. 回歸第一週為什麼通常拿不到一位？</p><div class="opts" data-ok="b"><button data-k="a">歌不夠紅</button><button data-k="b">分數看前一週累積</button><button data-k="c">規定禁止</button></div><div class="fb"></div></div>
+    <div class="q"><p>2. 韓國標準專屬合約的上限是幾年？</p><div class="opts" data-ok="b"><button data-k="a">5 年</button><button data-k="b">7 年</button><button data-k="c">10 年</button></div><div class="fb"></div></div>
+    <div class="q"><p>3. 為什麼粉絲會重複買同一張專輯？</p><div class="opts" data-ok="a"><button data-k="a">簽售抽籤機會</button><button data-k="b">歌曲不同</button><button data-k="c">價格便宜</button></div><div class="fb"></div></div>
+    <div class="q"><p>4. 練習生總數在 2020→2022 年怎麼變？</p><div class="opts" data-ok="c"><button data-k="a">變多</button><button data-k="b">不變</button><button data-k="c">減少近四成</button></div><div class="fb"></div></div>
+  </div>
+  <p class="src">來源：wiki／音樂節目、合約、粉絲經濟、練習生［S01, S03, S04, S06］</p>
+</section>
+
+<!-- s13 -->
+<section class="slide" id="s13" data-role="refs" data-wiki="index">
+  <p class="kicker">參考資料</p>
+  <h2>這份簡報的所有內容都來自 LLM Wiki</h2>
+  <ol class="refs">
+    <li><a href="https://www.koreatimes.co.kr/entertainment/k-pop/20251201/why-teen-k-pop-trainee-numbers-are-dropping-despite-greater-investment">S01 The Korea Times（2025-12-01）練習生人數下降</a></li>
+    <li><a href="https://www.soompi.com/article/1220849wpp/guide-music-show-wins-need-know">S02 Soompi（2018-08-29）音樂節目一位指南</a></li>
+    <li><a href="https://en.wikipedia.org/wiki/South_Korean_music_shows">S03 Wikipedia — Music programs of South Korea</a></li>
+    <li><a href="https://www.koreaherald.com/article/10580914">S04 The Korea Herald（2025-09-22）七年魔咒淡化</a></li>
+    <li><a href="https://www.kedglobal.com/newsView/ked202404240009">S05 KED Global（2024-04-24）多廠牌制度利弊</a></li>
+    <li><a href="https://www.koreatimes.co.kr/amp/entertainment/20240510/k-pop-fan-events-fuel-costly-race-for-face-time-with-idols">S06 The Korea Times（2024-05-10）簽售會與推專輯</a></li>
+    <li><a href="https://view.asiae.co.kr/en/article/2026010216254445333">S07 The Asia Business Daily（2026-01-02）一億張泡沫之後</a></li>
+    <li><a href="https://www.koreaherald.com/article/10921822">S08 The Korea Herald（2026-11-01）專輯銷量回升</a></li>
+  </ol>
+  <p class="note">Wiki、流程圖與檢查紀錄：<a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/wiki/index.md" target="_blank" rel="noopener" style="color:var(--violet)">wiki/index.md</a>　｜　<a href="https://github.com/eathenweng-droid/kpop-industry-wiki/blob/main/docs/workflow.md" target="_blank" rel="noopener" style="color:var(--violet)">docs/workflow.md</a></p>
+</section>
+
+</div></div>
+<div id="home"><a href="../index.html">← 專案首頁</a></div>
+<div id="nav"><button id="prev" aria-label="上一張">‹</button><span id="count"></span><button id="next" aria-label="下一張">›</button></div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide')), i=0, deck=document.getElementById('deck');
+  var m=location.hash.match(/s(\d+)/); if(m) i=Math.min(slides.length-1,Math.max(0,+m[1]-1));
+  function fit(){var s=Math.min(innerWidth/1320,innerHeight/760);deck.style.transform='scale('+s+')';}
+  function show(n){i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach(function(s,k){s.classList.toggle('active',k===i);});
+    document.getElementById('count').textContent=(i+1)+' / '+slides.length;
+    document.getElementById('bar').style.width=((i+1)/slides.length*100)+'%';
+    history.replaceState(null,'','#'+slides[i].id);}
+  document.getElementById('prev').onclick=function(){show(i-1)};
+  document.getElementById('next').onclick=function(){show(i+1)};
+  addEventListener('keydown',function(e){
+    if(['ArrowRight','PageDown',' '].indexOf(e.key)>-1){e.preventDefault();show(i+1);}
+    if(['ArrowLeft','PageUp'].indexOf(e.key)>-1){e.preventDefault();show(i-1);}});
+  var x0=null; addEventListener('touchstart',function(e){x0=e.touches[0].clientX},{passive:true});
+  addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>50)show(i+(dx<0?1:-1));x0=null});
+  document.querySelectorAll('.opts').forEach(function(box){
+    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      var ok=b.dataset.k===box.dataset.ok; b.classList.add(ok?'ok':'no');
+      box.nextElementSibling.textContent=ok?'答對了！':'再想想看～';});});
+  addEventListener('hashchange',function(){var m=location.hash.match(/s(\d+)/);if(m&&+m[1]-1!==i)show(+m[1]-1);});
+  addEventListener('resize',fit); fit(); show(i);
+})();
+</script>
+</body>
+</html>
